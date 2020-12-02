@@ -1,0 +1,353 @@
+body {margin:0;}
+
+/* Sample sight
+https://tamil.tn */
+
+
+.menu-container {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+  position: fixed;
+
+  top: 0;
+  right:0;
+  width: 100%;
+}
+
+.menu-right {
+  float:right;
+}
+
+.menu-right a{
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: 'Arima Madurai';
+}
+.menu-list {
+  float: left;  
+}
+
+.menu-list a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px; 
+  text-decoration: none;
+}
+
+.menu-list a:hover {
+	background-color: #4CAF50;
+	color: white;
+	}
+
+.not-active a {
+	color: black;
+	background-color: white;
+	
+}
+
+.active a {
+  background-color: #4CAF50;
+  color:white;
+}
+
+.signup-button, .signin-button{
+	background-color:transparent;
+	color:blue;
+	font-size:14px;
+	border-radius:12px;
+	border:1px solid #797979;
+	cursor: pointer;
+}
+.signup-button:hover, .signin-button:hover {
+	background-color:#797979;
+	color:white;
+	border:2px solid black;
+}
+
+.signup-button-container {
+	text-align:right;
+	margin-top:100px;
+	font-size:30px;
+	color:blue;
+}
+
+.signup-footer-container {
+	padding: 10px; 
+	margin-top: 30px; 
+	background-color: #f5f5f5;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .menu-sidebar {padding-top: 15px;}
+  .menu-sidebar a {font-size: 18px;}
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #ededed;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 0px 8px 20px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #482f19;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+	background-color: #515151;
+  	color: #e9dee3;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-size: 25px;
+  margin-left: 0;
+}
+
+
+.openbtn:hover {
+  background-color: #444;
+  color:white;
+  text-decoration:none;
+}
+
+#menu-main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+.openbtn  {
+   font-size: 15px;
+   cursor: pointer;
+   background-color: #030303;
+   color: white;
+   padding: 10px 15px;
+   border: none; 
+}
+
+.main-menu-container {
+	display:flex;
+	background-color:#030303;
+}
+
+
+nav ul {
+    margin-top: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    float: right;
+    /* background: #eee;
+    border-bottom: 1px solid #fff;
+    border-radius: 3px; */
+  }
+
+nav li {
+    float: left;
+  }
+/* 
+nav #login {
+    border-right: 1px solid #ddd;
+     box-shadow: 1px 0 0 #fff; 
+  }
+*/
+nav #login-icon, nav #logged-user-icon,
+  nav #signup a {
+  /*
+    display: inline-block;
+    *display: inline;
+    */
+    *zoom: 1;
+    height: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    padding: 0 8px;
+    text-decoration: none;
+    color: white; /*#444; */
+    text-shadow: 0 1px 0 #fff;
+  }
+ 
+nav #login-icon, nav #logged-user-icon
+ {
+    margin-top:10px;
+    margin-right:10px;
+ }
+nav #login-icon {
+    border-radius: 3px 0 0 3px;
+}
+
+  nav #login-icon:hover,
+  nav #loggged-user-icon:hover,
+  nav #login .active,
+  nav #signup a:hover {
+    background: #444; /*#fff; */
+    
+  }
+ nav #login-icon:hover, nav #logged-user-icon:hover {
+  
+  background-color: #444;
+  color:white;
+  text-decoration:none;
+}  
+   nav #login-content {
+    display: none;
+    position: absolute;
+    top:45px;
+    margin-right:10px;
+    z-index: 999;
+    background: #686868;
+     background-image: linear-gradient(top, #fff, #686868); 
+    /*padding: 15px; */
+    border: 1px solid #bdb0b0; 
+     box-shadow: 0 1px 1px -1px rgba(0,0,0,.9);
+    border-radius: 3px 0 3px 3px;
+  }
+  
+   nav li #login-content {
+    right: 0;
+    width: 250px;
+  }
+
+  #inputs input {
+    background: #f1f1f1;
+    padding: 6px 5px;
+    margin: 0 0 5px 0;
+    width: 200px;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    box-shadow: 0 1px 1px #ccc inset; 
+  }
+
+  #inputs input:focus {
+    background-color: #fff;
+    border-color: #e8c291; 
+    outline: none;
+    box-shadow: 0 0 0 1px #e8c291 inset;
+  }
+
+  #login-content #actions {
+    margin: 2px 0 0 0;
+    float: center;
+    text-align:center;
+  }
+
+  #actions #submit {
+    background-color: #ea167b;
+    color: #f9f9f9;
+    background-image: linear-gradient(top, #e97171, #d14545); 
+    border-radius: 3px;
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
+/*    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    border: 1px solid #7e1515; 
+    */
+
+    height: 30px;
+    padding: 0;
+    width: 100px;
+    cursor: pointer;
+    font: bold 14px Arial, Helvetica;
+
+  }
+
+  #login-content #submit:hover,
+  #login-content #submit:focus {
+    background-color: #c21167 ;
+    background-image: linear-gradient(top, #d14545, #e97171); 
+  }
+
+  #login-content #submit:active {
+    outline: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+  }
+  
+  #auth-error {
+  	height:30px;
+ 	
+  	text-align:center;
+	margin:2px;
+  	/*
+  	box-shadow: 0 0 1px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.3) inset; 
+    border: 1px solid #bdb0b0;
+    */
+    display:none;
+    /*background-color:none; */
+    visibility:hidden;
+  }
+  #auth-error a {
+    
+  	color:#ff8719;
+  	background-color: transparent;
+  }
+  
+  #login-content label {
+    float: right;
+    line-height: 30px;
+  }
+
+  #login-content label input {
+    position: relative;
+    top: 2px;
+    right: 2px;
+  }
+  
+ #logout-content {
+    display: none;
+    position: absolute;
+    top:45px;
+    margin-right:10px;
+    z-index: 999;
+    background: #686868;
+	
+    width:200px;
+    margin-left:-100px;
+    text-align:center;
+    border-radius:12px;
+     background-image: linear-gradient(top, #fff, #686868); 
+    /*padding: 15px; */
+    border: 1px solid #bdb0b0; 
+    box-shadow: 0 1px 1px -1px rgba(0,0,0,.9);
+    border-radius: 5px 0 5px 5px;
+ }
+  
+#logout-user-det {
+	background-color: #a3a3a3;
+	padding-top:19px;
+    color: transparent;
+    width: 200px;
+   	height: 50px;
+   	   
+       }
+#logout-content a {
+	background-color:transparent;
+	text-decoration:none;
+	
+}
+#logout-content #logout-link a:hover {
+	color: #c4dae8;
+}
+
+#logout-content #logout-link {
+	margin-top:15px;
+	height:35px;
+}

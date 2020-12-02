@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<link rel="stylesheet" href="/css/mypage.css">
+	<link rel="stylesheet" href="/css/common.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arima+Madurai&display=swap">
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+
+	<head>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	
+	<script src="/js/mypage.js"> </script>
+	
+	<script>
+		$(function() {
+			$('#footer').load('common #common-footer')
+			
+		})
+		
+	</script>
+	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	  $(document).ready(function(){
+		  var loginerror = /*[[${loginerrormess}]]*/ 'Success';
+		  //alert('login error '+loginerror)
+	      if ( loginerror != "Success") {
+			  $('#login-content').slideToggle();
+			  $('#login-content').toggleClass('active');
+		  }
+	  });
+	  /*]]>*/
+	</script>
+	
+	<script>
+	  $(document).ready(function(){
+	    	$('#login-icon').click(function(){
+	      		$(this).next('#login-content').slideToggle();
+	      		$(this).toggleClass('active');      
+	      })
+	  });
+	</script>
+
+	<script>
+	  $(document).ready(function(){
+	    	$('#logged-user-icon').click(function(){
+	      		$('#logout-content').slideToggle();
+	      		$('#logout-content').toggleClass('active');      
+	      })
+	  });
+	</script>
+	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		window.onload = function() {
+		    var userdesc= /*[[${userdesc}]]*/ '';
+		    var loginerrormess= /*[[${loginerrormess}]]*/ '';
+	    	loginDisplay(userdesc,loginerrormess);
+	    	}
+		/*]]>*/
+	</script>
+		
+	</head>
+	<body>
+	
+
+	<div id="main-menu" class="main-menu-container">
+		<div style="width:80%">
+	  		<button class="openbtn" onclick="openNav()">☰ முன் செல்வோம்</button> 
+	  	</div>
+	  	<div style="text-align:right;width:20%">
+	  		<nav>
+		  		<ul>
+		  		<li id="login-form">
+		  		<a href="#" id="logged-user-icon" th:text="${userdesc}"> </a>
+		  		<a href="#" id="login-icon" class="fas fa-lock"> Login</a>
+	
+					<div id="login-content">
+					<form action="#" th:action="@{/}" method="post" th:object="${loginFormData}">
+					<fieldset id="inputs">
+							<input id="username" th:field="*{username}" type="text" name="username" required placeholder="User Id">
+							<input id="password" th:field="*{userpass}" type="password"  name="password" placeholder="Password" required>
+					</fieldset>
+					<div id="auth-error">
+					<a th:text="${loginerrormess}">
+					    Invalid User-id/Password!
+					</a>
+					</div>
+					<fieldset id="actions">
+						<input type="submit" id="submit" value="Login">	
+					</fieldset>
+					</form>	
+					</div>			
+					<div id="logout-content">
+						<div id="logout-user-det">
+							<a id="logout-user-disp" th:text="${userdesc}"></a>
+							<a id="logout-user-mail" th:text="${useremail}"></a>
+						</div>
+						<div id="logout-link">
+							<a  href="/logoutuser" >Sign out</a>
+						</div>
+				   </div>
+			</nav>
+	  	</div>
+	</div>
+	
+	<!-- This script is for fragement usage for common menu - need more tuning to make this work
+	<div th:include="common :: mainmenu(formdata='loginFormData',action=@{/})"></div>
+	 -->
+
+	<div th:replace="common :: menusidebar" id="side-menu"> </div>
+	
+	
+		<div class="main-container">
+			<div class="main-flex">
+				<div class="image-container-home">
+					<img src="/images/tamil/kanyakumari.jpg" class="image-style" alt="Kanyakumari - Tiruvalluvar and Vivekandar Rock, Madurai" style="width:100%;;height:68.5%">
+				</div>
+				<div class="image-container-home">
+					<img src="/images/tamil/kallanai.jpg" class="image-style" alt="Kallanai - Tichy" style="width:100%;height:68.5%">
+				</div>
+				<div class="image-container-home">
+					<img src="/images/tamil/thirumalai-mahal.jpg" class="image-style" alt="Thirumalai Nayakar Mahal, Madurai" style="width:100%">
+				</div>
+			</div>
+			<div style="display:flex">
+				<div style="margin-top:-50px;width:75%">
+					<a class="disp-ma">Let's March Ahead...</a>
+				</div>
+				<div class="search-div">
+					<div id="searchwrap">
+		        			<form class="example" style="margin:auto;max-width:400px">
+		            			<input id="search-input" name="search" type="text" placeholder="Search...">
+		            			<button type="submit"><i class="fa fa-search"></i></button>
+		        			</form>
+					</div>
+					<div class="signin-button-container">
+						<a>volunteer</a>
+						<button onclick="window.location.href='/login'" class="signin-button">Signin here</button>
+					</div>
+
+				</div>
+				</div>
+			
+				<!--  About Munselvom -->
+				<div id="about">
+					<div class="about-div" >
+						<div class="animation1 about-head" id="div1"><b>Who are we?</b></div>
+						<div class="animation2" id="div2" style="border: 1px solid white;width:15%;height:10%"></div>
+						<div class="animation3 about-desc" id="div3">
+							We are helping our community to know the world
+						</div>
+						<div class="animation4 about-desc" id="div4">
+							Translating articles from other languages
+						</div>
+						<div class="about-empty-space"></div>
+					</div>
+					<div class="signup-button-container">
+						<a> To become a volunteer</a>
+						<button onclick="window.location.href='#top'" class="signup-button">Signup here</button>
+					</div>
+				</div>	
+		</div>
+		<div id="footer">
+		</div>
+	</body>
+</html>
