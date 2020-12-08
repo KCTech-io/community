@@ -128,8 +128,15 @@ public class HomeController {
 	@GetMapping("/welcome")
 	
 	   public String welcome(Model model) {
-			return "homepage/welcome";
-		}
+			return "trans-test";
+	}
+	
+	@GetMapping("/tamil")
+	
+	   public String tamil(Model model) {
+			return "/homepage/translate-test";
+	}
+	
 	@GetMapping("/template")
 	
 	   public String template(Model model) {
@@ -210,32 +217,73 @@ public class HomeController {
 
 			Optional<Articles> article;
 			
+			userService.updateSession();
+			UserList userList = userService.getAuthStatus();
+			
 
-			System.out.println(articleid);
+			model.addAttribute("loginFormData", new LoginFormData());
+
+			if (!Objects.isNull(userList)) {
+				model.addAttribute("userdesc", userList.getUserdesc());
+				model.addAttribute("useremail", userList.getEmailid());
+			}
+			else {
+				model.addAttribute("userdesc", "");
+				model.addAttribute("useremail", "");
+			}
+			
+			model.addAttribute("loginerrormess", "Success");
+
+			
 			article = articleService.getArticle(articleid);
 			
 			if (article.isPresent()) {
-				System.out.println("Found Data");
-				model.addAttribute("text", article.get().getArticletext());
+				System.out.println("Found Article Details of ID"+articleid);
+
+				//model.addAttribute("text", article.get().getArticletext());
+				//model.addAttribute("articlename", article.get().getArticlename());
 				
-				//model.addAttribute("transtext", "Article Not translated");
+				Articles articleData = article.get();
+				
+				System.out.println(articleData.toString());
+				model.addAttribute("articleData", articleData);
 				
 				
 				//if (article.get().getArticletrans() != null) {
-				model.addAttribute("transtext", article.get().getArticletrans());
-				//}
-				//else {
-				//	model.addAttribute("trans-text", "Article Not translated");
-				//}
-				System.out.println(article.get().getArticletrans());
-				model.addAttribute("status", article.get().getTransstat());
+				//model.addAttribute("transtext", article.get().getArticletrans());
+
+				//model.addAttribute("status", article.get().getTransstat());
 			}
 			else {
-				System.out.println("Not found");
+				System.out.println("Article Not found");
 			}
 				
 			 return "/homepage/open-article";
     }
+	
+
+	@RequestMapping(value = "/savearticle", method = RequestMethod.POST)
+	public String saveArticle(@ModelAttribute("articleData") Articles articleData, //
+			Model model) throws Exception
+	{
+		
+		UserList userList = userService.getAuthStatus();
+
+		if (!Objects.isNull(userList)) {
+			
+			articleData.setTransstat("IN PROGRESS");
+			
+			articleService.updateArticle(articleData.getArticleid(), articleData);
+			return "redirect:/translate/article?articleid="+articleData.getArticleid()+"&userid="+userList.getUserName();
+		}
+		
+		return "redirect:/";
+			
+	}
+
+
+
+
 
 	@GetMapping("/signup")
     public String signupVolunteer(Model model) {
