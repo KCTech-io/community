@@ -1,54 +1,247 @@
 <!DOCTYPE html>
 <html xmlns:th=http://www.thymeleaf.org>
-	<link rel="stylesheet" href="/css/mypage.css">
-	<link rel="stylesheet" href="/css/common.css">
-	<link rel="stylesheet" href="/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arima+Madurai&display=swap">
-	<meta charset="UTF-8"> 
-	<meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+<head>
+<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arima+Madurai&display=swap">
 
-	<head>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js">
-	</script>
-	<script src="/js/mypage.js"> </script>
-	<script>
-		$(function() {
-			$('#menu').load("/common #common-menu",
-					function(responsetxt,statustext,jqXHR){
-							changeActiveMenu('menu_translate');
-						});
+
+<script type="text/javascript" src="/js/utf.js"></script>
+<script type="text/javascript" src="/js/tamil.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script type="text/javascript" src="/js/mypage.js"> </script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+	$(document).ready(function() {
+		$('textarea').on('keydown', function(event) {
+			if ($('#keypad-switch').prop("checked") == true) {		
+				toggleKBMode(event);
+			} else {
+				return true;
+			}
+		});
+		$('textarea').on('keypress', function(event) {
+			if ($('#keypad-switch').prop("checked") == true) {
+				convertThis(event);
+			}
+		});
+		$('#keypad-switch').click(function (event) {
+			if (this.checked) {
+				$('#tamil-keymap').show();	
+				$('#tamil-keymap').child().show();
+			}
+			else
+				{
+				$('#tamil-keymap').hide();
+				}
 			});
+	});
+</script>
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	  $(document).ready(function(){
+		  var loginerror = /*[[${loginerrormess}]]*/ 'Success';
+		  //alert('login error '+loginerror)
+	      if ( loginerror != "Success") {
+			  $('#login-content').slideToggle();
+			  $('#login-content').toggleClass('active');
+		  }
+	  });
+	  /*]]>*/
 	</script>
 	
-	</head>
-	<body >
-	
-		<div id="menu">
-		</div>
-		<!--  To be translated -->
-		
-		<div id="open-art" class="translate-container">
-			<div>
-				<p class="translate-container-head"> Test Page</p>
-			</div>
-					<div>
-						<p> 
-						  <a th:text="${text}"></a>
-						 </p>
-					</div>
-					<div>
-						<p> 
-						  <a th:text="${transtext}"></a>
-						 </p>
-					</div>
-					<div>
-						<p> 
-						  <a th:text="${status}"></a>
-						 </p>
-					</div>					<div>
-					<button class="translate-contribute">contribute</button>
-					</div> 						 
-				</div>
+	<script>
+	  $(document).ready(function(){
+	    	$('#login-icon').click(function(){
+	      		$(this).next('#login-content').slideToggle();
+	      		$(this).toggleClass('active');      
+	      })
+	  });
+	</script>
 
-	</body>
+	<script>
+	  $(document).ready(function(){
+	    	$('#logged-user-icon').click(function(){
+	      		$('#logout-content').slideToggle();
+	      		$('#logout-content').toggleClass('active');      
+	      })
+	  });
+	</script>
+	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		window.onload = function() {
+		    var userdesc= /*[[${userdesc}]]*/ '';
+		    var loginerrormess= /*[[${loginerrormess}]]*/ '';
+	    	loginDisplay(userdesc,loginerrormess);
+	    	}
+		/*]]>*/
+	</script>
+
+
+
+</head>
+<body>
+
+	<div id="main-menu" class="main-menu-container">
+		<div style="width:80%">
+	  		<button class="openbtn" onclick="openNav()">☰ முன் செல்வோம்</button> 
+	  	</div>
+	  	<div style="text-align:right;width:20%">
+	  		<nav>
+		  		<ul>
+		  		<li id="login-form">
+		  		<a href="#" id="logged-user-icon" th:text="${userdesc}"> </a>
+		  		<a href="#" id="login-icon" class="fas fa-lock"> Login</a>
+	
+					<div id="login-content">
+					<form action="#" th:action="@{/}" method="post" th:object="${loginFormData}">
+					<fieldset id="inputs">
+							<input id="username" th:field="*{username}" type="text" name="username" required placeholder="User Id">
+							<input id="password" th:field="*{userpass}" type="password"  name="password" placeholder="Password" required>
+					</fieldset>
+					<div id="auth-error">
+					<a th:text="${loginerrormess}">
+					    Invalid User-id/Password!
+					</a>
+					</div>
+					<fieldset id="actions">
+						<input type="submit" id="submit" value="Login">	
+					</fieldset>
+					</form>	
+					</div>			
+					<div id="logout-content">
+						<div id="logout-user-det">
+							<a id="logout-user-disp" th:text="${userdesc}"></a>
+							<a id="logout-user-mail" th:text="${useremail}"></a>
+						</div>
+						<div id="logout-link">
+							<a  href="/logoutuser" >Sign out</a>
+						</div>
+				   </div>
+			</nav>
+	  	</div>
+	</div>
+
+	<div th:replace="common :: menusidebar" id="side-menu"> </div>
+
+
+	<div id="open-article" >
+		<div id="article-name">
+			<h1 th:text="${articleData.getArticlename()}"></h1>
+		</div>
+		<div style="display:flex;flex-direction:column">
+		    <div id="article-text" class="scrollbar scroll-style-2">
+	 				<a th:text="${articleData.getArticletext()}"></a>
+	 		</div>
+			<div id="transtext">
+				<a th:text="${transtext}"></a>
+			</div>
+			<div style="display:flex;flex-direction:row">
+			<div id="article-status">
+					<b th:text="'Status :' + ${articleData.getTransstat()}"></b>
+			</div>
+			<div id="trans-font">
+				<label for="keypad-switch" style="text-align:center;margin-left:20px">Enable Tamil Font</label>
+				<input type="checkbox" id="keypad-switch" checked/>
+			</div>
+			</div>
+		<div id="trans-label">
+			<b>Translation</b>
+		</div>
+		<div id="article-translation">
+			<form id="translation-form" name="submit-translation" method="post" th:object="${articleData}" action="#" th:action="@{/savearticle}">
+				<div style="display:flex;flex-direction:row">
+					<div style="width:89%">
+					<fieldset style="border:none">
+						<textarea id="translatedtext" th:field="*{articletrans}" name="translatedtext" class="scrollbar scroll-style-2">
+						</textarea>
+						<input type="hidden" th:field="*{articleid}">
+						<input type="hidden" th:field="*{transstat}">
+						<input type="hidden" th:field="*{articlename}">
+						<input type="hidden" th:field="*{articletext}">
+						</fieldset>
+					</div>
+					<div style="width:11%">
+						<fieldset style="border:none">
+							<input type="submit" id="save-article-btn" value="Save">
+						</fieldset>
+						<button id="submit-article-btn" >Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="tamil-keymap">
+				<div>
+					<table id="tbl-vowels" >
+						<tr>
+							<th id="tbl-vowels-h" colspan="7"> Key Map - Vowels </th>
+						</tr> 
+						<tr>			
+							<td><span class="tbl-english"> a </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> அ </span></td>
+							<td><span class="tbl-english"> A/aa </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஆ </span></td>
+							<td><span class="tbl-english"> i </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> இ </span></td>
+							<td><span class="tbl-english"> I/ii </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஈ </span></td>
+							<td><span class="tbl-english"> u </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> உ </span></td>
+							<td><span class="tbl-english"> U/uu </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஊ </span></td>
+						</tr>
+						<tr>
+							<td><span class="tbl-english"> e </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> எ </span></td>
+							<td><span class="tbl-english"> E/ee </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஏ </span></td>
+							<td><span class="tbl-english"> ai </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஐ </span></td>
+							<td><span class="tbl-english"> o </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஒ </span></td>
+							<td><span class="tbl-english"> O/oo </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஓ </span></td>
+							<td><span class="tbl-english"> au </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஔ </span></td>
+							<td><span class="tbl-english"> q </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஃ </span></td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<table id="tbl-consonant">
+						<tr>
+							<th id="tbl-consonant-h" colspan="6"> Key Map - Consonants </th>
+						<tr>
+							<td><span class="tbl-english"> K </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> க் </span></td>
+							<td><span class="tbl-english"> ng </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ங் </span></td>
+							<td><span class="tbl-english"> s/c </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ச் </span></td>
+							<td><span class="tbl-english"> nj </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஞ் </span></td>
+							<td><span class="tbl-english"> d/t </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ட் </span></td>
+							<td><span class="tbl-english"> N </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ண் </span></td>
+						</tr>
+						<tr>
+							<td><span class="tbl-english"> th </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> த் </span></td>
+							<td><span class="tbl-english"> w </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ந் </span></td>
+							<td><span class="tbl-english"> p </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ப் </span></td>
+							<td><span class="tbl-english"> m </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ம் </span></td>
+							<td><span class="tbl-english"> y </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ய் </span></td>
+							<td><span class="tbl-english"> r </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ர் </span></td>
+						</tr>
+						<tr>
+							<td><span class="tbl-english"> l </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ல் </span></td>
+							<td><span class="tbl-english"> v </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> வ் </span></td>
+							<td><span class="tbl-english"> R </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ற் </span></td>
+							<td><span class="tbl-english"> L </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ள் </span></td>
+							<td><span class="tbl-english"> z </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ழ் </span></td>
+							<td><span class="tbl-english"> n </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ன் </span></td>
+						</tr>
+						<tr>
+							<td><span class="tbl-english"> S </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஸ் </span></td>
+							<td><span class="tbl-english"> sh </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஷ் </span></td>
+							<td><span class="tbl-english"> j </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஜ் </span></td>
+							<td><span class="tbl-english"> h </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஹ் </span></td>
+							<td><span class="tbl-english"> sri </span><span class="tbl-colon">:</span> <span class="tbl-tamil"> ஸ்ரீ </span></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+</div>
+
+</body>
 </html>

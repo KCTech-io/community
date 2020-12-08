@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+	<link rel="stylesheet" href="/css/mypage.css">
+	<link rel="stylesheet" href="/css/common.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arima+Madurai&display=swap">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<script src="js/mypage.js"> </script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+
+	<head>
+	
+
+	<script>
+	$(function() {
+		$('#footer').load('common #common-footer')
+		
+	})
+
+	</script>
+	
+	</head>
+	<body >
+
+	<script>
+		$(function() {
+			$('#footer').load('common #common-footer')
+			
+		})
+		
+	</script>
+	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	  $(document).ready(function(){
+		  var loginerror = /*[[${loginerrormess}]]*/ 'Success';
+		  //alert('login error '+loginerror)
+	      if ( loginerror != "Success") {
+			  $('#login-content').slideToggle();
+			  $('#login-content').toggleClass('active');
+		  }
+	  });
+	  /*]]>*/
+	</script>
+	
+	<script>
+	  $(document).ready(function(){
+	    	$('#login-icon').click(function(){
+	      		$(this).next('#login-content').slideToggle();
+	      		$(this).toggleClass('active');      
+	      })
+	  });
+	</script>
+
+	<script>
+	  $(document).ready(function(){
+	    	$('#logged-user-icon').click(function(){
+	      		$('#logout-content').slideToggle();
+	      		$('#logout-content').toggleClass('active');      
+	      })
+	  });
+	</script>
+	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		window.onload = function() {
+		    var userdesc= /*[[${userdesc}]]*/ '';
+		    var loginerrormess= /*[[${loginerrormess}]]*/ '';
+	    	loginDisplay(userdesc,loginerrormess);
+	    	}
+		/*]]>*/
+	</script>
+		
+	</head>
+	<body>
+	
+	  
+	<div id="main-menu" class="main-menu-container">
+		<div style="width:80%">
+	  		<button class="openbtn" onclick="openNav()">☰ முன் செல்வோம்</button> 
+	  	</div>
+	  	<div style="text-align:right;width:20%">
+	  		<nav>
+		  		<ul>
+		  		<li id="login-form">
+		  		<a href="#" id="logged-user-icon" th:text="${userdesc}"> </a>
+		  		<a href="#" id="login-icon" class="fas fa-lock"> Login</a>
+	
+					<div id="login-content">
+					<form action="#" th:action="@{/}" method="post" th:object="${loginFormData}">
+					<fieldset id="inputs">
+							<input id="username" th:field="*{username}" type="text" name="username" required placeholder="User Id">
+							<input id="password" th:field="*{userpass}" type="password"  name="password" placeholder="Password" required>
+					</fieldset>
+					<div id="auth-error">
+					<a th:text="${loginerrormess}">
+					    Invalid User-id/Password!
+					</a>
+					</div>
+					<fieldset id="actions">
+						<input type="submit" id="submit" value="Login">	
+					</fieldset>
+					</form>	
+					</div>			
+					<div id="logout-content">
+						<div id="logout-user-det">
+							<a id="logout-user-disp" th:text="${userdesc}"></a>
+							<a id="logout-user-mail" th:text="${useremail}"></a>
+						</div>
+						<div id="logout-link">
+							<a  href="/logoutuser" >Sign out</a>
+						</div>
+				   </div>
+			</nav>
+	  	</div>
+	</div>
+	<!--                        
+	<div th:include="common :: mainmenu(formdata=${formData},action=@{/})"></div>
+	 -->
+
+	<div th:replace="common :: menusidebar" id="side-menu"> </div>
+	<div id="translate" class="translate-container">
+			<div>
+				<p class="translate-container-head"> தமிழில் மொழிபெயர்க்கப்பட வேண்டிய பதிப்புகள்...</p>
+			</div>
+			<div class="article-flex">
+				<div>
+					<div class="image-container-translate" >
+						<img src="/images/translate/whatsapp.jpg" style="width:80%"></img>
+						<p> 
+							<b>
+								<a href="https://news.sky.com/story/new-whatsapp-feature-will-make-messages-vanish-after-seven-days-12124257" style="text-decoration:none">
+									New WhatsApp feature will make messages vanish after seven days...!
+								</a>
+							</b>
+						 </p>
+					</div>
+					<div>
+					<button class="translate-contribute">contribute</button>
+					</div> 						 
+				</div>
+				<div>
+					<div class="image-container-translate" >
+						<img src =/images/translate/resilience-ind-economy.jpg style="width:80%"></img>
+						<p> 
+							<b>
+								<a href="https://www.ft.com/content/38b64e69-8de0-442b-b24f-8b8dbd46bb53" style="text-decoration:none">
+									Investors bet on the resilience of India’s rural economy 
+								</a>
+							</b>
+						</p>
+						</div>
+					<div>
+						<button class="translate-contribute">contribute</button>
+					</div> 
+				</div>
+				<div>
+					<div class="image-container-translate" >
+						<img src =/images/translate/share-market.png style="width:80%"></img>
+						<p> 
+							<b>
+								<a href="https://www.angelbroking.com/knowledge-center/share-market/share-market-basics">
+									WHAT IS SHARE MARKET FOR BEGINNERS?
+								</a>
+							</b>
+						</p>
+					</div>
+					<div>
+						<button class="translate-contribute">contribute</button>
+					</div>
+				</div>
+				<div >
+					<div class="image-container-translate" >
+					<img src =/images/translate/durian-fruits.jpg style="width:80%"></img>
+					<p> 
+						<b>
+							<a href="https://www.healthline.com/nutrition/durian-fruit" target="_blank">
+								Durian Fruit: Smelly but Incredibly Nutritious 
+							</a>
+						</b>
+					</p>
+					</div>
+					<div>
+					<button class="translate-contribute">contribute</button> 
+					</div>
+				</div>				
+			</div>				
+		</div>
+		
+		<div id="trans-stat">
+			<div>
+				<p class="translate-stat-head">தேர்ந்தெடுக்கப்பட்ட பதிப்புகளின் நிலவரம்...</p>
+			</div>
+			<div class="article-flex">
+				<div>
+					<div class="image-container-translate" >
+						<img src="/images/translate/siddhamedicine.jpg" style="width:80%"></img>
+						<p>
+							<b>
+								<a href="javascript:openTranslate('SIDDHA','RAJK',,'APPROVED');">							
+									Can Siddha medicine be used in COVID-care? Docs say more testing needed....!</a>
+							</b>
+						 </p>
+					</div>
+					<div>
+					<p class="translate-stat-text">Status : <span class="trans-stat-approved">Approved</span></p>
+					</div>					 
+				</div>
+				<div>
+					<div class="image-container-translate" >
+						<img src="/images/translate/us-election.png" style="width:80%"></img>
+						<p>
+							<b>
+								<!-- <a href="https://www.bbc.com/news/election-us-2020-53785985">  -->
+								<a href="javascript:openTranslate('ABOUTTAMILPEOPLE','RAJKUMAR');">
+									An Introduction to the History of Tamil People
+								</a>
+							</b>
+					   </p>
+					</div>
+					<div>
+					<p class="translate-stat-text">Status : <span class="trans-stat-review">Review In Progress</span></p>
+					</div> 						 
+				</div>
+				<div>
+					<div class="image-container-translate" >
+						<img src="/images/translate/waterinmoon.png" style="width:80%"></img>
+						<p>
+						 	<b>
+						 		<a href="https://thefederal.com/the-eighth-column/water-on-the-moon-why-the-indian-discovery-is-sidelined/">
+						 			Water on the moon: Why Indian discovery is sidelined?
+						 		</a>
+						 	</b>
+						</p>
+					</div>
+					<div>
+					<p class="translate-stat-text">Status : <span class="trans-stat-pending-review">Pending Review</span></p>
+					</div> 						 
+				</div>
+				<div>
+					<div class="image-container-translate" >
+						<img src="/images/translate/foul-smelling-fuels.jpg" style="width:80%"></img>
+						<p>
+						 	<b>
+						 		<a href="https://www.bbc.com/news/business-54511743">
+						 			The foul-smelling fuel that could power big ships
+						 		</a>
+						 	</b>
+						</p>
+					</div>
+					<div>
+					<p class="translate-stat-text">Status : <span class="trans-stat-in-progress">Translation In progress</span></p>
+					</div> 						 
+				</div>
+				<div>
+					<div class="image-container-translate" >
+						<img src="/images/translate/penguins.jpg" style="width:80%"></img>
+						<p>
+							<b>
+								<a href="https://www.bbc.com/news/science-environment-54817124">
+									Gentoo penguins are four species, not one
+								</a>
+							</b>
+						</p>
+					</div>
+					<div>
+					<p class="translate-stat-text">Status : <span class="trans-stat-pending">Translation Pending</span></p>
+					</div> 						 
+				</div>
+				
+			</div>
+		</div>
+
+	</body>
+</html>
