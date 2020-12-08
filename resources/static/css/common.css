@@ -351,3 +351,216 @@ nav #login-icon {
 	margin-top:15px;
 	height:35px;
 }
+
+
+
+#keypad-switch {
+  -webkit-appearance: none;
+  position: relative;
+  width: 50px;
+  height:25px;
+  background-size: cover;
+  border-radius: 50px;
+  outline: none;
+  transition: background-image .90s;
+  box-shadow: 0px 2px 5px 1px gray;
+  background-color: #b6b6b6;
+  content:"tamil";
+}
+
+#keypad-switch:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  /*background-color: navy;*/
+  border-radius: 50%;
+  transition: all .9s;
+  background-color: #f2eeff; 
+}
+
+#keypad-switch:checked {
+  /*background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png); */
+  transition: background-image .90s;
+  background-color:blue;
+  content:"english";
+  
+
+}
+
+#keypad-switch:checked:before {
+  transform: translate(100%);
+  transition: all .9s;
+  background-color: #ECF0F3;
+}
+
+
+
+#keypad-switch:checked + #keypad-switch:before {
+ -webkit-transform: translateX(55px);
+  -ms-transform: translateX(55px);
+  transform: translateX(55px);
+}
+
+#tamil-keymap {
+	display:flex;
+	margin-left:10px;
+}
+
+#tbl-vowels, #tbl-consonant, #tbl-vowels td, #tbl-consonant td {
+	border:1px solid #dddd;
+	text-align:left;
+	padding:5px;
+}
+
+#tbl-vowels td, #tbl-consonant td {
+	background-color:#fff4dd;
+	color:green;
+}
+
+
+#tbl-vowels, #tbl-consonant {
+	background-color:grey;
+	margin-left:10px;
+}
+
+#article-text {
+	width:100%;
+	height:100px;
+}
+
+
+.tbl-english {
+	color:#3e533e;
+	font-size:90%;
+}
+
+.tbl-colon {
+	color:#3e533e;
+}
+.tbl-tamil {
+	color:#c66100;
+	font-size:120%;
+}
+
+#tbl-vowels-h, #tbl-consonant-h {
+	color:#3a398f;
+	background-color:#f2bd5c;
+	font-size:20px;
+	text-align:center;
+}
+
+.scrollbar
+{
+	float: left;
+	background: #F5F5F5;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+
+#wrapper
+{
+	text-align: center;
+	width: 500px;
+	margin: auto;
+}
+
+#open-article {
+	margin-top:10px;
+	margin-left:10px;
+	background-color: #f3f3f3;
+}
+
+#article-name {
+	padding-top:5px;
+	margin-left:20px;
+}
+
+#article-text {
+	border:1px solid green;
+	margin-left:20px;
+	height: 150px;
+	width: 80%; 
+	border-radius:3px;
+	display:block;
+}
+
+#trans-label {
+	border:1px solid #757575;
+	margin-left:20px;
+	margin-top:10px;
+	width:80%;
+	text-align:center;
+	border-radius:5px;
+	background-color:#dcdcdc;
+	color: #03894c;
+	font-size:30px;
+}
+#article-status {
+	width:50%;
+	margin-left:20px;
+	color: #de7d08;
+}
+#trans-font {
+	float:right;
+	*width:50%;
+}
+
+#article-translation {
+	/*border:1px solid green;*/
+	margin-left:10px; 
+	margin-top:10px;
+	height: 150px;
+	width: 90%;
+	/*border-radius:3px;*/
+}
+#translatedtext {
+	width:100%;
+	height:150px;
+}
+
+#save-article-btn {
+	margin-left:10px;
+	margin-top:0px;
+	border-radius: 3px;
+	cursor:pointer;
+}
+#submit-article-btn {
+	margin-left:20px;
+	margin-top:50px;
+	border-radius: 3px;
+	cursor:pointer;
+}
+#tamil-keymap {
+	color: blue;
+	margin-top:30px;
+	/*display:none;
+	visibility:hidden; */
+}
+
+.scroll-style-2::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.scroll-style-2::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.scroll-style-2::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #D62929;
+}
