@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.antMatchers("/translate").hasRole("USER")
+			.antMatchers("/translate/**").hasRole("USER")
 			.antMatchers("/").permitAll()
 			/*
 			.exceptionHandling(e -> e
