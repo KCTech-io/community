@@ -1,0 +1,64 @@
+<!-- 
+<div th:fragment="mainmenu(formdata,action)" class="main-menu-container">
+		<div style="width:80%">
+	  		<button class="openbtn" onclick="openNav()">☰ முன் செல்வோம்</button> 
+	  	</div>
+	  	<div style="text-align:right;width:20%">
+	  		<nav>
+		  		<ul>
+		  		<li id="login-form">
+		  		<a href="#" id="logged-user-icon" th:text="${userdesc}"> </a>
+		  		<a href="#" id="login-icon" class="fas fa-lock"> Login</a>
+	
+					<div id="login-content">
+					<form id="loginid" th:action="${action}" method="post" th:object="${__${formdata}__}" role="form"> 
+					<fieldset id="inputs">
+							<input id="username" th:field="*{__${formdata}__.username}" type="text" name="username" required placeholder="User Id">
+							<input id="password" th:field="*{userpass}" type="password"  name="password" placeholder="Password" required>
+					</fieldset>
+					<div id="auth-error">
+					<a th:text="${loginerrormess}">
+					    Invalid User-id/Password!
+					</a>
+					</div>
+					<fieldset id="actions">
+						<input type="submit" id="submit" value="Login">	
+					</fieldset>
+					</form>	
+					</div>			
+					<div id="logout-content">
+						<div id="logout-user-det">
+							<a id="logout-user-disp" th:text="${userdesc}"></a>
+							<a id="logout-user-mail" th:text="${useremail}"></a>
+						</div>
+						<div id="logout-link">
+							<a  href="/logoutuser" >Sign out</a>
+						</div>
+				   </div>
+			</nav>
+	  	</div>
+	</div>
+	  -->
+	
+	<div th:fragment = "menusidebar" id="menu-side-bar" class="sidebar">
+	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+	  <a href="/">Home</a>
+	  <a href="/articles">Articles</a>
+	  <a href="/translate">Translate</a>
+	  <a href="/signup">Sign up</a>
+	  <a href="/contact">Contact</a>
+	</div>
+
+	<div id="common-footer">
+		<div class="signup-footer-container">
+			<h1>எங்களிடம் கை சேருங்கள்</h1>
+			<p>நாம் அனைவரும் ஒன்றாக இணைந்து நமது சமூகத்தை முன்னோக்கி செல்வோம்</p>
+			<div class="signup-button-container">
+				<a>எங்களுடன் பயணம் செய்ய</a>
+				<button onclick="window.location.href='/signup'" class="signup-button">கை சேரவும்</button>
+			</div>
+		</div>
+	</div>
+
+	
+	
