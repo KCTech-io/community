@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html xmlns:th=http://www.thymeleaf.org>
+
+<head>
+    <title>jQuery Virtual Keyboard Example</title>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<link href="css/keyboard.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.keyboard.js"></script>
+    <script src="js/jquery.keyboard.extension-typing.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#txtkeyboard').keyboard({
+        autoAccept:true
+    })
+     .addTyping();
+        $('#txtNumkeyboard').keyboard({
+            layout: 'num',
+            restrictInput: true,
+            preventPaste: true,
+            autoAccept: true
+        })
+        .addTyping();
+    });
+</script>
+</head>
+<body>
+<table>
+<tr>
+<td><b>Keyboard Text:</b></td><td> <input type="text" id="txtkeyboard" /></td>
+</tr>
+<tr>
+<td><b>Numberpad Text:</b></td>
+<td><input type="text" id="txtNumkeyboard" /></td>
+</tr>
+</table>
+</body>
+</html>
